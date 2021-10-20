@@ -1,3 +1,5 @@
+using System;
+
 namespace DIO.Bank
 {
     public class Conta
@@ -13,6 +15,38 @@ namespace DIO.Bank
             this.Saldo = saldo;
             this.Credito = credito;
             this.Nome = nome;
+        }
+
+        public bool Sacar(double valorSaque)
+        {
+            if(this.Saldo - valorSaque < (this.Credito * -1))
+            {
+                Console.WriteLine("Saldo insuficiente!!");
+                return false;
+            }
+
+            this.Saldo -= valorSaque;
+
+            Console.WriteLine("Saque efetuado no valor de: R${0}", valorSaque);
+            Console.WriteLine("Saldo atual da conta de: {0} é: R${1}.", this.Nome, this.Saldo);
+
+            return true;
+        }
+
+        public void Depositar(double valorDeposito)
+        {
+            this.Saldo += valorDeposito;
+
+            Console.WriteLine("Deposito efetuado no valor de: R${0}", valorDeposito);
+            Console.WriteLine("Saldo atual da conta de: {0} é: R${1}.", this.Nome, this.Saldo);
+        }
+
+        public void Trasferir(double valorTrasferencia, Conta contaDestino)
+        {
+            if(this.Sacar(valorTrasferencia))
+            {
+                contaDestino.Depositar(valorTrasferencia);
+            }
         }
     }
 }
