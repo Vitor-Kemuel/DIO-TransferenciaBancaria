@@ -48,5 +48,15 @@ namespace DIO.Bank
                 contaDestino.Depositar(valorTrasferencia);
             }
         }
+
+        public override string ToString()
+        {
+            string retorno = "";
+            retorno += "|Tipo Conta: " + this.TipoConta + "|";
+            retorno += "Nome: " + this.Nome + "|";
+            retorno += "Saldo: R$" + this.Saldo + "|";
+            retorno += "Credito: R$" + this.Credito + "|";
+            return retorno;
+        }
     }
 }
